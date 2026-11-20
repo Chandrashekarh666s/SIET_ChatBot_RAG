@@ -7,7 +7,7 @@ from sentence_transformers import SentenceTransformer
 #loading PDF
 def load_pdf (pdf_path):
   reader = PDFReader(str(pdf_path))
-  mypages = [ i.extract_text() or "" for in reader.pages]
+  mypages = [ i.extract_text() or "" for i in reader.pages]
   full_text ="\n".join(mypages).strip()
   if not full_text:
     raise ValueError("No readable Text Found")
@@ -65,7 +65,7 @@ def ask_rag( question, embd_model, chunks, index , api_key, num_chunk=3, model_n
   key = api_key
   if not key:
     raise ValueError("API Key Missing")
-  background = retrieve_content (question , embd_model, chunks, index, num_chunks=3)
+  background =retrieve_content(question , embd_model, chunks, index, num_chunks=3)
   prompt = """ Act as an Professional AI Assistance. 
   Answer user question using ONLY document background below.
   Don not invent or assume facts.
