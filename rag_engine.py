@@ -46,7 +46,7 @@ def load_base(pdf_path = "01_College_Information.pdf"):
 return  index, embd_model , chunks
 
 #retrieve
-def retrieve_content(question , embd_model. chunks, index, num_chunks=3):
+def retrieve_content(question , embd_model , chunks, index, num_chunks=3):
   if not question.strip():
     raise ValueError("Question cannot be blank")
   if num_chunk < 1 :
