@@ -61,11 +61,11 @@ def retrieve_content(question , embd_model. chunks, index, num_chunks=3):
   return background
 
 #Ask
-def ask_rag( question, embd_model, chunks, index , api_key, num_chunks, model_name= "openai/gpt-oss-120b"):
+def ask_rag( question, embd_model, chunks, index , api_key, num_chunk=3, model_name= "openai/gpt-oss-120b"):
   key = api_key
-  if not key :
+  if not key:
     raise ValueError("API Key Missing")
-  background = retrieve_content (question , embd_model. chunks, index, num_chunks=3)
+  background = retrieve_content (question , embd_model, chunks, index, num_chunks=3)
   prompt = """ Act as an Professional AI Assistance. 
   Answer user question using ONLY document background below.
   Don not invent or assume facts.
