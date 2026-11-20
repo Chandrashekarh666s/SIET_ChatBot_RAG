@@ -42,7 +42,7 @@ def build_vectors(chunks, model_name = "all-MiniM-L6-v2"):
 def load_base(pdf_path = "01_College_Information.pdf"):
   full_text = load_pdf(pdf_path)
   chunks = create_chunks(full_text)
-  index , embd_model  = build_vector(chunks)
+  index , embd_model  = build_vectors(chunks)
   return  index, embd_model , chunks
 
 #retrieve
