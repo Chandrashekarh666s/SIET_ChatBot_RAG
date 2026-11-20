@@ -8,7 +8,7 @@ st.caption("Ask anything about the college information")
 st.caption("Created by Chandrashekar H")
 
 mykey = st.secrets("GROQ_API_KEY")
-
+@st.cache_resource #Reducing overloading 
 def intiate_rag():
   return load_base("01_College_Information.pdf")
 index, embd_model, chunks = initiate.rag()
