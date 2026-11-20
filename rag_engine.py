@@ -1,7 +1,7 @@
 import  faiss
 import numpy as np
 from groq import Groq
-from pypdf import PDFReader
+from pypdf import pdfreader
 from sentence_transformers import SentenceTransformer
 
 #loading PDF
@@ -42,8 +42,8 @@ def build_vectors(chunks, model_name = "all-MiniM-L6-v2"):
 def load_base(pdf_path = ""):
   full_text = load_pdf(pdf_path)
   chunks = create_chunks(full_text)
-  embd_model , index = build_vector(chunks)
-return embd_model , chunks, index
+  index , embd_model  = build_vector(chunks)
+return embd_model ,chunks, index
 
 #retrieve
 def retrieve_content (question , embd_model. chunks, index, num_chunks=3):
