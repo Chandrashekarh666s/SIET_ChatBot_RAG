@@ -5,7 +5,7 @@ from pypdf import pdfreader
 from sentence_transformers import SentenceTransformer
 
 #loading PDF
-def load_pdf ( pdf_path):
+def load_pdf (pdf_path):
   reader = PDFReader(str(pdf_path))
   mypages = [ i.extract_text() or "" for in reader.pages]
   full_text ="\n".join(mypages).strip()
@@ -35,18 +35,18 @@ def build_vectors(chunks, model_name = "all-MiniM-L6-v2"):
   faiss.normalize_L2(embd_vectors)
   index = faiss.IndexFlatIP(embd_vectors.shape[1])
   index.add(embd_vectors)
-  return index, embd_model
+  return index, embd_model 
 
 
 #Call Loadpdf ,chunk, embedding
-def load_base(pdf_path = ""):
+def load_base(pdf_path = "01_College_Information.pdf"):
   full_text = load_pdf(pdf_path)
   chunks = create_chunks(full_text)
   index , embd_model  = build_vector(chunks)
-return embd_model ,chunks, index
+return  index, embd_model , chunks
 
 #retrieve
-def retrieve_content (question , embd_model. chunks, index, num_chunks=3):
+def retrieve_content(question , embd_model. chunks, index, num_chunks=3):
   if not question.strip():
     raise ValueError("Question cannot be blank")
   if num_chunk < 1 :
@@ -73,7 +73,7 @@ def ask_rag( question, embd_model, chunks, index , api_key, num_chunks, model_na
   Document Background :""" + background + "User Question"+ question + "Answer:"
   client = Groq(api_key = key)
   response = client.chat.completions.create( 
-    model = model_name,
+    model = "openai/gpt-oss-120b",
     message = [ {"role" : "user",
                 "content" : prompt}],
                   temperature = 0.3,
