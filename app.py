@@ -11,7 +11,7 @@ mykey = st.secrets["GROQ_API_KEY"]
 @st.cache_resource #Reducing overloading 
 def initiate_rag():
   return load_base("01_College_Information.pdf")
-index, embd_model, chunks = initiate_rag()
+index, embd_model, chunks = initiate.rag()
 
 if "chat_hist" not in st.session_state:
   st.session_state.chat_hist = []
